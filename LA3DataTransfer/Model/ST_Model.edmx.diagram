@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fe174eb1c2e64cbc98c0fad4164e4ef7" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="ST_Model.ST_Collector" Width="1.5" PointX="2.875" PointY="1" />
+        <EntityTypeShape EntityType="ST_Model.ST_Account" Width="1.5" PointX="4.875" PointY="1" />
+        <EntityTypeShape EntityType="ST_Model.ST_Customer" Width="1.5" PointX="6.875" PointY="0.875" />
+        <EntityTypeShape EntityType="ST_Model.ST_Payment" Width="1.5" PointX="0.5" PointY="0.875" />
+        <EntityTypeShape EntityType="ST_Model.Parameter" Width="1.5" PointX="1.375" PointY="3.5" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

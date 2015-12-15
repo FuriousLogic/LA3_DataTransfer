@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LA_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="LA_ModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="LA_Model.Store.Accounts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AccountStatus" EntityType="LA_Model.Store.AccountStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AccountStatusChanges" EntityType="LA_Model.Store.AccountStatusChanges" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Collectors" EntityType="LA_Model.Store.Collectors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Customers" EntityType="LA_Model.Store.Customers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Payments" EntityType="LA_Model.Store.Payments" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_AccountAccountStatusChange" Association="LA_Model.Store.FK_AccountAccountStatusChange">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountStatusChanges" EntitySet="AccountStatusChanges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountPayment" Association="LA_Model.Store.FK_AccountPayment">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountStatusAccountStatusChange" Association="LA_Model.Store.FK_AccountStatusAccountStatusChange">
+            <End Role="AccountStatus" EntitySet="AccountStatus" />
+            <End Role="AccountStatusChanges" EntitySet="AccountStatusChanges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectorCustomer" Association="LA_Model.Store.FK_CollectorCustomer">
+            <End Role="Collectors" EntitySet="Collectors" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerAccount" Association="LA_Model.Store.FK_CustomerAccount">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="int" Nullable="false" />
+          <Property Name="NetValue" Type="float" Nullable="false" />
+          <Property Name="GrossValue" Type="float" Nullable="false" />
+          <Property Name="PaymentPeriod" Type="int" Nullable="false" />
+          <Property Name="PayMonthly" Type="bit" Nullable="false" />
+          <Property Name="Payment" Type="float" Nullable="false" />
+          <Property Name="LastChecked" Type="datetime" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NextPaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="PrintedForm" Type="bit" Nullable="false" />
+          <Property Name="OldId" Type="int" Nullable="false" />
+          <Property Name="LockedByUser" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Customer_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountStatusChanges">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="AccountStatus_Id" Type="int" Nullable="false" />
+          <Property Name="Account_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Collectors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CollectorName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OldId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Forename" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreferredDay" Type="int" Nullable="false" />
+          <Property Name="Maxloan" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="Locked" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="LockedByUser" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Collector_Id" Type="int" Nullable="false" />
+          <Property Name="OldId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsSundry" Type="bit" Nullable="false" />
+          <Property Name="PaidByAccountId" Type="int" Nullable="false" />
+          <Property Name="Account_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AccountAccountStatusChange">
+          <End Role="Accounts" Type="LA_Model.Store.Accounts" Multiplicity="1" />
+          <End Role="AccountStatusChanges" Type="LA_Model.Store.AccountStatusChanges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountStatusChanges">
+              <PropertyRef Name="Account_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountPayment">
+          <End Role="Accounts" Type="LA_Model.Store.Accounts" Multiplicity="1" />
+          <End Role="Payments" Type="LA_Model.Store.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="Account_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountStatusAccountStatusChange">
+          <End Role="AccountStatus" Type="LA_Model.Store.AccountStatus" Multiplicity="1" />
+          <End Role="AccountStatusChanges" Type="LA_Model.Store.AccountStatusChanges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountStatusChanges">
+              <PropertyRef Name="AccountStatus_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectorCustomer">
+          <End Role="Collectors" Type="LA_Model.Store.Collectors" Multiplicity="1" />
+          <End Role="Customers" Type="LA_Model.Store.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="Collector_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerAccount">
+          <End Role="Customers" Type="LA_Model.Store.Customers" Multiplicity="1" />
+          <End Role="Accounts" Type="LA_Model.Store.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DeleteCollectors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LA_Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LA_Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="LA_Model.Account" />
+          <EntitySet Name="AccountStatus" EntityType="LA_Model.AccountStatu" />
+          <EntitySet Name="AccountStatusChanges" EntityType="LA_Model.AccountStatusChange" />
+          <EntitySet Name="Collectors" EntityType="LA_Model.Collector" />
+          <EntitySet Name="Customers" EntityType="LA_Model.Customer" />
+          <EntitySet Name="Payments" EntityType="LA_Model.Payment" />
+          <AssociationSet Name="FK_AccountAccountStatusChange" Association="LA_Model.FK_AccountAccountStatusChange">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountStatusChanges" EntitySet="AccountStatusChanges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountPayment" Association="LA_Model.FK_AccountPayment">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerAccount" Association="LA_Model.FK_CustomerAccount">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountStatusAccountStatusChange" Association="LA_Model.FK_AccountStatusAccountStatusChange">
+            <End Role="AccountStatus" EntitySet="AccountStatus" />
+            <End Role="AccountStatusChanges" EntitySet="AccountStatusChanges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectorCustomer" Association="LA_Model.FK_CollectorCustomer">
+            <End Role="Collectors" EntitySet="Collectors" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <FunctionImport Name="DeleteCollectors" />
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InvoiceNumber" Type="Int32" Nullable="false" />
+          <Property Name="NetValue" Type="Double" Nullable="false" />
+          <Property Name="GrossValue" Type="Double" Nullable="false" />
+          <Property Name="PaymentPeriod" Type="Int32" Nullable="false" />
+          <Property Name="PayMonthly" Type="Boolean" Nullable="false" />
+          <Property Name="Payment" Type="Double" Nullable="false" />
+          <Property Name="LastChecked" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Notes" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NextPaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PrintedForm" Type="Boolean" Nullable="false" />
+          <Property Name="OldId" Type="Int32" Nullable="false" />
+          <Property Name="LockedByUser" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Customer_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountStatusChanges" Relationship="LA_Model.FK_AccountAccountStatusChange" FromRole="Accounts" ToRole="AccountStatusChanges" />
+          <NavigationProperty Name="Payments" Relationship="LA_Model.FK_AccountPayment" FromRole="Accounts" ToRole="Payments" />
+          <NavigationProperty Name="Customer" Relationship="LA_Model.FK_CustomerAccount" FromRole="Accounts" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="AccountStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="AccountStatusChanges" Relationship="LA_Model.FK_AccountStatusAccountStatusChange" FromRole="AccountStatus" ToRole="AccountStatusChanges" />
+        </EntityType>
+        <EntityType Name="AccountStatusChange">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AccountStatus_Id" Type="Int32" Nullable="false" />
+          <Property Name="Account_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="LA_Model.FK_AccountAccountStatusChange" FromRole="AccountStatusChanges" ToRole="Accounts" />
+          <NavigationProperty Name="AccountStatu" Relationship="LA_Model.FK_AccountStatusAccountStatusChange" FromRole="AccountStatusChanges" ToRole="AccountStatus" />
+        </EntityType>
+        <EntityType Name="Collector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CollectorName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Notes" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="OldId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="LA_Model.FK_CollectorCustomer" FromRole="Collectors" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Forename" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PostCode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Notes" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PreferredDay" Type="Int32" Nullable="false" />
+          <Property Name="Maxloan" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Locked" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="LockedByUser" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Collector_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="LA_Model.FK_CustomerAccount" FromRole="Customers" ToRole="Accounts" />
+          <NavigationProperty Name="Collector" Relationship="LA_Model.FK_CollectorCustomer" FromRole="Customers" ToRole="Collectors" />
+          <Property Type="Int32" Name="OldId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsSundry" Type="Boolean" Nullable="false" />
+          <Property Name="PaidByAccountId" Type="Int32" Nullable="false" />
+          <Property Name="Account_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="LA_Model.FK_AccountPayment" FromRole="Payments" ToRole="Accounts" />
+        </EntityType>
+        <Association Name="FK_AccountAccountStatusChange">
+          <End Role="Accounts" Type="LA_Model.Account" Multiplicity="1" />
+          <End Role="AccountStatusChanges" Type="LA_Model.AccountStatusChange" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountStatusChanges">
+              <PropertyRef Name="Account_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountPayment">
+          <End Role="Accounts" Type="LA_Model.Account" Multiplicity="1" />
+          <End Role="Payments" Type="LA_Model.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="Account_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerAccount">
+          <End Role="Customers" Type="LA_Model.Customer" Multiplicity="1" />
+          <End Role="Accounts" Type="LA_Model.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountStatusAccountStatusChange">
+          <End Role="AccountStatus" Type="LA_Model.AccountStatu" Multiplicity="1" />
+          <End Role="AccountStatusChanges" Type="LA_Model.AccountStatusChange" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountStatusChanges">
+              <PropertyRef Name="AccountStatus_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectorCustomer">
+          <End Role="Collectors" Type="LA_Model.Collector" Multiplicity="1" />
+          <End Role="Customers" Type="LA_Model.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="Collector_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LA_ModelStoreContainer" CdmEntityContainer="LA_Entities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="IsTypeOf(LA_Model.Account)">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="NetValue" ColumnName="NetValue" />
+          <ScalarProperty Name="GrossValue" ColumnName="GrossValue" />
+          <ScalarProperty Name="PaymentPeriod" ColumnName="PaymentPeriod" />
+          <ScalarProperty Name="PayMonthly" ColumnName="PayMonthly" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="LastChecked" ColumnName="LastChecked" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="NextPaymentDate" ColumnName="NextPaymentDate" />
+          <ScalarProperty Name="PrintedForm" ColumnName="PrintedForm" />
+          <ScalarProperty Name="OldId" ColumnName="OldId" />
+          <ScalarProperty Name="LockedByUser" ColumnName="LockedByUser" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccountStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(LA_Model.AccountStatu)">
+        <MappingFragment StoreEntitySet="AccountStatus">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccountStatusChanges">
+      <EntityTypeMapping TypeName="IsTypeOf(LA_Model.AccountStatusChange)">
+        <MappingFragment StoreEntitySet="AccountStatusChanges">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="AccountStatus_Id" ColumnName="AccountStatus_Id" />
+          <ScalarProperty Name="Account_Id" ColumnName="Account_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Collectors">
+      <EntityTypeMapping TypeName="IsTypeOf(LA_Model.Collector)">
+        <MappingFragment StoreEntitySet="Collectors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CollectorName" ColumnName="CollectorName" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="OldId" ColumnName="OldId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(LA_Model.Customer)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Forename" ColumnName="Forename" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="PreferredDay" ColumnName="PreferredDay" />
+          <ScalarProperty Name="Maxloan" ColumnName="Maxloan" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Locked" ColumnName="Locked" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="LockedByUser" ColumnName="LockedByUser" />
+          <ScalarProperty Name="Collector_Id" ColumnName="Collector_Id" />
+          <ScalarProperty Name="OldId" ColumnName="OldId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="IsTypeOf(LA_Model.Payment)">
+        <MappingFragment StoreEntitySet="Payments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="IsSundry" ColumnName="IsSundry" />
+          <ScalarProperty Name="PaidByAccountId" ColumnName="PaidByAccountId" />
+          <ScalarProperty Name="Account_Id" ColumnName="Account_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteCollectors" FunctionName="LA_Model.Store.DeleteCollectors" />
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
