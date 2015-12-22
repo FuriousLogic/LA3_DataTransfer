@@ -700,7 +700,7 @@ namespace LA3DataTransfer
             {
                 toolStripStatusLabel1.Text = @"Clearing Staging Data";
             });
-            _dbSt.TruncateTables1();
+            TruncateTables();
 
             //Collectors
             DataSet ds = CoreFunctions.GetDatasetFromAccess("select * from Collector", txtFilename.Text);
@@ -833,6 +833,15 @@ namespace LA3DataTransfer
                 });
             }
             _dbSt.SaveChanges();
+        }
+
+        private static void TruncateTables()
+        {
+            string sql= @"truncate table dbo.st_payment
+                        truncate table dbo.st_account
+                        truncate table dbo.st_customer
+                        truncate table dbo.st_collector";
+            CoreFunctions.ExecuteSQL(sql);
         }
 
         void bgwStagingData_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

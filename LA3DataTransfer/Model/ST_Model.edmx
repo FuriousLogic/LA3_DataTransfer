@@ -5,84 +5,83 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ST_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="ST_ModelStoreContainer">
-          <EntitySet Name="Parameters" EntityType="ST_Model.Store.Parameters" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ST_Account" EntityType="ST_Model.Store.ST_Account" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ST_Collector" EntityType="ST_Model.Store.ST_Collector" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ST_Customer" EntityType="ST_Model.Store.ST_Customer" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ST_Payment" EntityType="ST_Model.Store.ST_Payment" store:Type="Tables" Schema="dbo" />
-        </EntityContainer>
-        <EntityType Name="Parameters">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="int" Nullable="false" />
-          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ST_Account">
-          <Key>
-            <PropertyRef Name="account_id" />
-          </Key>
-          <Property Name="account_id" Type="int" Nullable="false" />
-          <Property Name="cust_id" Type="int" />
-          <Property Name="ret_price" Type="decimal" Precision="19" Scale="4" />
-          <Property Name="tot_amount" Type="decimal" Precision="19" Scale="4" />
-          <Property Name="period" Type="smallint" />
-          <Property Name="payment" Type="decimal" Precision="19" Scale="4" />
-          <Property Name="left_to_pay" Type="decimal" Precision="19" Scale="4" />
-          <Property Name="overdue_amount" Type="decimal" Precision="19" Scale="4" />
-          <Property Name="last_checked" Type="datetime" />
-          <Property Name="next_payment" Type="datetime" />
-          <Property Name="posted" Type="bit" Nullable="false" />
-          <Property Name="posted_date" Type="datetime" />
-          <Property Name="monthly" Type="bit" Nullable="false" />
-          <Property Name="printed_form" Type="bit" Nullable="false" />
-          <Property Name="pay_off" Type="nvarchar" MaxLength="50" />
-          <Property Name="pay_off_amount" Type="decimal" Precision="19" Scale="4" />
-          <Property Name="notes" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="ST_Collector">
-          <Key>
-            <PropertyRef Name="collector_id" />
-          </Key>
-          <Property Name="collector_id" Type="int" Nullable="false" />
-          <Property Name="notes" Type="nvarchar(max)" />
-          <Property Name="name" Type="nvarchar" MaxLength="40" />
-        </EntityType>
-        <EntityType Name="ST_Customer">
-          <Key>
-            <PropertyRef Name="cust_id" />
-          </Key>
-          <Property Name="cust_id" Type="int" Nullable="false" />
-          <Property Name="forename" Type="nvarchar" MaxLength="30" />
-          <Property Name="surname" Type="nvarchar" MaxLength="20" />
-          <Property Name="address" Type="nvarchar(max)" />
-          <Property Name="notes" Type="nvarchar(max)" />
-          <Property Name="collector_id" Type="int" />
-          <Property Name="week_day" Type="int" />
-          <Property Name="max_loan" Type="float" />
-          <Property Name="cust_date" Type="datetime" />
-          <Property Name="debt" Type="decimal" Precision="19" Scale="4" />
-          <Property Name="telephone" Type="nvarchar" MaxLength="30" />
-          <Property Name="start_date" Type="datetime" />
-          <Property Name="Locked" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ST_Payment">
-          <Key>
-            <PropertyRef Name="Payment_id" />
-            <PropertyRef Name="account_id" />
-          </Key>
-          <Property Name="Payment_id" Type="int" Nullable="false" />
-          <Property Name="account_id" Type="int" Nullable="false" />
-          <Property Name="date" Type="datetime" />
-          <Property Name="amount" Type="decimal" Precision="19" Scale="4" />
-          <Property Name="Note" Type="nvarchar" MaxLength="50" />
-          <Property Name="Sundry" Type="bit" Nullable="false" />
-          <Property Name="Left_to_pay" Type="float" />
-        </EntityType>
-        <Function Name="TruncateTables" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-      </Schema></edmx:StorageModels>
+  <EntityContainer Name="ST_ModelStoreContainer">
+    <EntitySet Name="ST_Collector" EntityType="ST_Model.Store.ST_Collector" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ST_Account" EntityType="ST_Model.Store.ST_Account" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ST_Customer" EntityType="ST_Model.Store.ST_Customer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ST_Payment" EntityType="ST_Model.Store.ST_Payment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Parameters" EntityType="ST_Model.Store.Parameters" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="ST_Collector">
+    <Key>
+      <PropertyRef Name="collector_id" />
+    </Key>
+    <Property Name="collector_id" Type="int" Nullable="false" />
+    <Property Name="notes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="ST_Account">
+    <Key>
+      <PropertyRef Name="account_id" />
+    </Key>
+    <Property Name="account_id" Type="int" Nullable="false" />
+    <Property Name="cust_id" Type="int" Nullable="true" />
+    <Property Name="ret_price" Type="decimal" Nullable="true" Precision="19" Scale="4" />
+    <Property Name="tot_amount" Type="decimal" Nullable="true" Precision="19" Scale="4" />
+    <Property Name="period" Type="smallint" Nullable="true" />
+    <Property Name="payment" Type="decimal" Nullable="true" Precision="19" Scale="4" />
+    <Property Name="left_to_pay" Type="decimal" Nullable="true" Precision="19" Scale="4" />
+    <Property Name="overdue_amount" Type="decimal" Nullable="true" Precision="19" Scale="4" />
+    <Property Name="last_checked" Type="datetime" Nullable="true" />
+    <Property Name="next_payment" Type="datetime" Nullable="true" />
+    <Property Name="posted" Type="bit" Nullable="false" />
+    <Property Name="posted_date" Type="datetime" Nullable="true" />
+    <Property Name="monthly" Type="bit" Nullable="false" />
+    <Property Name="printed_form" Type="bit" Nullable="false" />
+    <Property Name="pay_off" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="pay_off_amount" Type="decimal" Nullable="true" Precision="19" Scale="4" />
+    <Property Name="notes" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ST_Customer">
+    <Key>
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="forename" Type="nvarchar" Nullable="true" MaxLength="30" />
+    <Property Name="surname" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="address" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="notes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="collector_id" Type="int" Nullable="true" />
+    <Property Name="week_day" Type="int" Nullable="true" />
+    <Property Name="max_loan" Type="float" Nullable="true" />
+    <Property Name="cust_date" Type="datetime" Nullable="true" />
+    <Property Name="debt" Type="decimal" Nullable="true" Precision="19" Scale="4" />
+    <Property Name="telephone" Type="nvarchar" Nullable="true" MaxLength="30" />
+    <Property Name="start_date" Type="datetime" Nullable="true" />
+    <Property Name="Locked" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ST_Payment">
+    <Key>
+      <PropertyRef Name="Payment_id" />
+      <PropertyRef Name="account_id" />
+    </Key>
+    <Property Name="Payment_id" Type="int" Nullable="false" />
+    <Property Name="account_id" Type="int" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="true" />
+    <Property Name="amount" Type="decimal" Nullable="true" Precision="19" Scale="4" />
+    <Property Name="Note" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Sundry" Type="bit" Nullable="false" />
+    <Property Name="Left_to_pay" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Parameters">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ST_Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -246,7 +245,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="TruncateTables1" FunctionName="ST_Model.Store.TruncateTables" />
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -263,6 +261,7 @@
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

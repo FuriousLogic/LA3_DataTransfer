@@ -12,8 +12,8 @@ namespace LA3DataTransfer.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
+    //using System.Data.Objects;
+    //using System.Data.Objects.DataClasses;
     using System.Linq;
     
     public partial class ST_Entities : DbContext
@@ -34,14 +34,14 @@ namespace LA3DataTransfer.Model
         public DbSet<ST_Payment> ST_Payment { get; set; }
         public DbSet<Parameter> Parameters { get; set; }
     
-        public virtual int TruncateTables()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TruncateTables");
-        }
+        //public virtual int TruncateTables()
+        //{
+        //    return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TruncateTables");
+        //}
     
-        public virtual int TruncateTables1()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TruncateTables1");
-        }
+        //public virtual int TruncateTables1()
+        //{
+        //    return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TruncateTables1");
+        //}
     }
 }

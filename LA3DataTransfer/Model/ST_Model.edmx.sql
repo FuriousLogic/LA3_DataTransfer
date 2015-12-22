@@ -1,9 +1,9 @@
 
 -- --------------------------------------------------
--- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
+-- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/12/2013 07:15:39
--- Generated from EDMX file: C:\Users\Barry\Documents\Visual Studio 2012\Projects\LA3DataTransfer\LA3DataTransfer\Model\ST_Model.edmx
+-- Date Created: 12/16/2015 09:50:27
+-- Generated from EDMX file: C:\Development\GitHub\LA3_DataTransfer\LA3DataTransfer\Model\ST_Model.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -22,20 +22,20 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[ST_Collector]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ST_Collector];
+IF OBJECT_ID(N'[dbo].[Parameters]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Parameters];
 GO
 IF OBJECT_ID(N'[dbo].[ST_Account]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ST_Account];
+GO
+IF OBJECT_ID(N'[dbo].[ST_Collector]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ST_Collector];
 GO
 IF OBJECT_ID(N'[dbo].[ST_Customer]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ST_Customer];
 GO
 IF OBJECT_ID(N'[dbo].[ST_Payment]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ST_Payment];
-GO
-IF OBJECT_ID(N'[dbo].[Parameters]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Parameters];
 GO
 
 -- --------------------------------------------------
